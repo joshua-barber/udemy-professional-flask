@@ -1,13 +1,23 @@
 import os
 import pdb
 
-from flask import Flask, url_for
+from flask import Flask, url_for, request
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
 	#Use url_for to reference app routes indirectly
-	return url_for('show_user_profile',username='Richard')
+	return url_for('show_user_profile',username='Richard') #example username Richard
+
+@app.route('/login',methods=['GET'])
+	#restrict login page to GET methods
+def login():
+	#Generate simple login form
+	if request.values:
+		return 'username is ' + request.values["username"] #return results once data has been submitted
+	else:
+		return'<form method="get" action="/login"><input type="text" name="username"/><p><button type="submit">Submit</button></form>'
 
 @app_route('user/<username>')
 def show_user_profile(username):
