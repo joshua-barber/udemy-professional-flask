@@ -10,14 +10,14 @@ def index():
 	#Use url_for to reference app routes indirectly
 	return url_for('show_user_profile',username='Richard') #example username Richard
 
-@app.route('/login',methods=['GET'])
-	#restrict login page to GET methods
+@app.route('/login',methods=['GET','POST'])
+	#restrict login page to GET and POST methods
 def login():
 	#Generate simple login form
-	if request.values:
+	if request.method == 'POST':
 		return 'username is ' + request.values["username"] #return results once data has been submitted
 	else:
-		return'<form method="get" action="/login"><input type="text" name="username"/><p><button type="submit">Submit</button></form>'
+		return'<form method="post" action="/login"><input type="text" name="username"/><p><button type="submit">Submit</button></form>'
 
 @app_route('user/<username>')
 def show_user_profile(username):
