@@ -1,12 +1,13 @@
 import os
 import pdb
 
-from flask import Flask
+from flask import Flask, url_for
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return "Index Page"
+	#Use url_for to reference app routes indirectly
+	return url_for('show_user_profile',username='Richard')
 
 @app_route('user/<username>')
 def show_user_profile(username):
